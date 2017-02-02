@@ -1,0 +1,57 @@
+var abcss = '<style>' +
+'article .podcast {' +
+'    clear: left;' +
+'}' +
+'.article-sidebar.AB {' +
+'    padding: 40px 0 20px;' +
+'}' +
+'.article-sidebar .ABsidebar-wrap {' +
+'    margin: 20px 0 0 0;' +
+'    display: block;' +
+'}' +
+'.article-sidebar .ABsidebar-wrap:after {' +
+'    display: block;' +
+'    clear: both;' +
+'	 content: " ";' +
+'}' +
+'.article-sidebar .ABsidebar-wrap .ABimage {' +
+'    width: 60px;' +
+'    height: 60px;' +
+'    border-radius: 35px;' +
+'    margin: 0 15px 10px 28px;' +
+'    float: left;' +
+'    overflow: hidden;' +
+'}' +
+'.article-sidebar .ABsidebar-wrap .ABname {' +
+'	width: 60%;' +
+'    float: left;' +
+'    color: #00306e;' +
+'    font-weight: 800;' +
+'    line-height: 24px;' +
+'}' +
+'.article-sidebar .ABsidebar-wrap .ABtitle {' +
+'    float: left;' +
+'    width: 60%;' +
+'    font-size: 13px;' +
+'    color: #777;' +
+'}' +
+'a.exp12 { color: #fff !important; text-decoration: underline !important; }' +
+'a.exp12:hover { color: #c2c2c2 !important; }' +
+'</style>';
+
+$(function() {
+	if(typeof McKinseyAuthors != 'undefined'){
+		$('head').append(abcss);
+		$('.article-sidebar').css('clear','left');
+		var $htmlAB = $('<span class="eyebrow">Meet the Authors</span>');
+		$.each(McKinseyAuthors, function(key, val){
+			$htmlAB = $htmlAB.add('	<a href="'+val.url+'" class="ABsidebar-wrap">' +
+					 '		<img src="'+val.img.replace('mw=60', 'mw=200')+'" class="ABimage">' +
+					 '		<div class="ABname">'+key+'</div>' +
+					 '		<div class="ABtitle">'+val.title+'</div>' +
+					 '	</a>');
+		});
+		$htmlAB = $htmlAB.wrapAll('<div class="article-sidebar collapsed AB" experiment-location="LeftRail" />').parent();
+		$('article > p:eq(1)').after($htmlAB);
+	}
+});

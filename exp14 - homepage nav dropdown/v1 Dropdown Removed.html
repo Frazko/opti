@@ -1,0 +1,4 @@
+$('head #ABCSS').remove();
+$('.global-primary-nav-r3 .primary-navigation > .nav-list > .nav-item.has-children > a:contains("Careers"), .global-primary-nav-r3 .primary-navigation > .nav-list > .nav-item.has-children > a:contains("About Us")').each(function(){
+	$(this).attr('href',$(this).siblings('.sub-nav').find('.sub-nav-item:first a').attr('href')).parent().removeClass('has-children').children('.sub-nav').remove();
+});

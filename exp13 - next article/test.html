@@ -1,0 +1,82 @@
+<html>
+<style>
+@media screen and (min-width: 1280px){
+	#ch8-sticky-social {
+		visibility: hidden;
+		opacity: 0;
+		transition: visibility 0s .5s, opacity .5s linear;
+		position: fixed;
+		background-image: url(http://www.mckinsey.com/redesign/resources/images/article-hero-background-250px.png);
+		z-index: 105;
+		top: 0;
+		height: 56px;
+		width: 100%;
+		border-bottom: solid 1px #dee1e0;
+	}
+
+	#ch8-sticky-social.ch8-show {
+		visibility: visible;
+		opacity: 1;
+		transition: opacity .5s linear;
+	}
+	
+	#ch8-sticky-social #ch8-sticky-social-inner {
+		max-width: 1242px;
+		margin: 0 auto;
+	}
+	
+	#ch8-sticky-social #ch8-sticky-social-inner #ch8-article-title {
+		width: calc(100% - 389px);
+		text-align: left;
+		float: left;
+		margin-top: 15px;
+		color: #5a5a5a;
+		font-size: 20px;
+		font-family: 'Chronicle Deck', Georgia, Times, 'Times New Roman', serif;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
+	#ch8-sticky-social #ch8-sticky-social-inner #ch8-buttons {
+		float: right;
+		margin-right: 0;
+	}
+
+	#ch8-sticky-social #ch8-sticky-social-inner #ch8-buttons ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	#ch8-sticky-social #ch8-sticky-social-inner #ch8-buttons ul li {
+		width: 60px;
+		height: 56px;
+		float: left;
+	}
+}
+</style>
+
+
+<body>
+
+
+<div id="ch8-sticky-social" class="ch8-show">
+	<div id="ch8-sticky-social-inner">
+		<div id="ch8-article-title">New talent tensions in an era of lower investment returns</div>
+		<div id="ch8-buttons">
+			<ul>
+				<li><a href="#0" class="mck-linkedin-icon" role="button"><span class="visually-hidden">Share this article on LinkedIn</span></a></li>
+				<li><a href="#0" class="mck-twitter-icon" role="button"><span class="visually-hidden">Share this article on Twitter</span></a></li>
+				<li><a href="#0" class="mck-facebook-icon" role="button"> <span class="visually-hidden">Share this article on Facebook</span></a></li>
+				<li><a class="ch8-social-share-button" id="ch8-email" href="#"><img src="http://cdn.optimizely.com/img/537950227/e473b46c68e9437489dc5b35fe6e6d58.png"></a></li>
+				<li><a class="ch8-social-share-button" id="ch8-print" href="#"><img src="http://cdn.optimizely.com/img/537950227/9d128e54c5464495877eca31c75ba0fb.png"></a></li>
+				<li><a class="ch8-social-share-button" id="ch8-download" href="#"><img src="http://cdn.optimizely.com/img/537950227/8fb681ce18bb4092b836f97d9141bc28.png"></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div style="height: 1000px; width: 50px; border: 1px solid #ccc;" />
+</body>
+</html>

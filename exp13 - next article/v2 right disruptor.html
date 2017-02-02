@@ -1,0 +1,54 @@
+var abcss = '<style>' +
+'aside.disruptor.-span-leftAB {' +
+'    float: right;' +
+'    width: 50%;' +
+'    margin: 20px 0 20px 50px;' +
+'    margin-right: -25%;' +
+'    padding: 0;' +
+'    border: none;' +
+'    border-left: 1px solid #d4d4d4;' +
+'    z-index: 10;' +
+'    position: relative;' +
+'}' +
+'aside.disruptor.-span-leftAB .readNextAB {' +
+'    text-transform: uppercase;' +
+'    color: #042d6c;' +
+'    padding: 0 0 10px 0;' +
+'    font-family: Arial;' +
+'    font-weight: 600;' +
+'    font-size: 15px;' +
+'}' +
+'aside.disruptor.-span-leftAB img {' +
+'    display: none;' +
+'}' +
+'aside.disruptor.-span-leftAB .disruptor-content {' +
+'    padding: 5px 0 5px 10%;' +
+'}' +
+'aside.disruptor.-span-leftAB .disruptor-content .title {' +
+'    font-size: 33px;' +
+'	 background: #ce2029;' +
+'	 background: -webkit-linear-gradient(left, #ce2029 , #ff8501);' +
+'	 background: -o-linear-gradient(right, #ce2029, #ff8501);' +
+'	 background: -moz-linear-gradient(right, #ce2029, #ff8501);' +
+'	 background: linear-gradient(to right, #ce2029 , #ff8501);' +
+'	 -webkit-background-clip: text;' +
+'	 -webkit-text-fill-color: transparent;' +
+'	 margin: 0;' +
+'}' +
+'@media screen\0 {' +
+'	 aside.disruptor.-span-leftAB .disruptor-content .title {' +
+'	 background: transparent;' +
+'	 color: #e65116;' +
+'	}' +
+'}' +
+'</style>';
+
+$(function() {
+	$('head').append(abcss);
+	var $parent = $('aside.disruptor a.cta:contains("Read this article"), aside.disruptor a.cta:contains("Read the article")').parents('aside');
+	$parent.attr('experiment-location', 'RightRailDisruptor').removeClass('-span-right').addClass('-span-leftAB');
+	$('.disruptor-content', $parent).prepend('<div class="readNextAB">Read Next</div>');
+	var $clonedA = $('a.cta', $parent).clone().removeAttr('class').empty();
+	$('.title', $parent).wrap($clonedA);
+	$('.article-body-wrapper .rail').removeAttr('style');
+});

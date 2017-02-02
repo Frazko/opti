@@ -1,0 +1,168 @@
+var abcss = '<style>' +
+'@media screen and (max-width: 1179px){' +
+'	#socialNavAB {' +
+'		display: none;' +
+'	}' +
+'}' +
+'@media screen and (min-width: 1180px){' +
+'	#socialNavAB {' +
+'		visibility: hidden;' +
+'		opacity: 0;' +
+'		transition: visibility 0s .5s, opacity .5s linear;' +
+'		position: fixed;' +
+'		background-image: url(http://www.mckinsey.com/redesign/resources/images/article-hero-background-250px.png);' +
+'		z-index: 105;' +
+'		top: 0;' +
+'		height: 98px;' +
+'		width: 100%;' +
+'		border-bottom: solid 1px #dee1e0;' +
+'	}' +
+'	#socialNavAB.showAB {' +
+'		visibility: visible;' +
+'		opacity: 1;' +
+'		transition: opacity .5s linear;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB {' +
+'		max-width: 1440px;' +
+'		margin: 0 auto;' +
+'		padding-left: 7.36264%;' +
+'		padding-right: 7.36264%;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #titleWrapAB {' +
+'		width: calc(50% - 180px);' +
+'		text-align: left;' +
+'		float: right;' +
+'		color: #5a5a5a;' +
+'		font-size: 18px;' +
+'		font-family: "Chronicle Deck", Georgia, Times, "Times New Roman", serif;' +
+'		text-overflow: ellipsis;' +
+'	    position: relative;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #titleWrapAB .divAB {' +
+'    	border-left: 1px solid #ccc;' +
+'   	float: left;' +
+'    	height: 60px;' +
+'    	margin: 19px 0 0 -20px;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #titleWrapAB .titleChildAB {' +
+'		position: absolute;' +
+'   	left: 0;' +
+'   	top: 0;' +
+'   	height: 98px;' +
+'	    display: table;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #titleWrapAB .titleChildAB p {' +
+'		display: table-cell;' +
+'   	vertical-align: middle;' +
+'   	line-height: 22px;' +
+'	    padding-right: 20px;' +
+'	}' +
+'	#socialNavAB .readNextAB {' +
+'		width: 170px;' +
+'		height: 40px;' +
+'		float: right;' +
+'	}' +
+'	#socialNavAB .readNextAB a.btn {' +
+'		margin: 27px 0;' +
+'		padding: 11px 20px 9px;' +
+'		float: right;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB {' +
+'		float: left;' +
+'		margin: 14px 0 0 0;' +
+'		width: 49%;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB .titleAB {' +
+'		font-size: 14px;' +
+'		padding: 0 0 7px 0;' +
+'	    letter-spacing: -0.02em;' +
+'		text-overflow: ellipsis;' +
+'		overflow: hidden;' +
+'	    white-space: nowrap;' +
+'	    width: 97%;' +
+'	    display: inline-block;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB .titleAB b {' +
+'		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;' +
+'		font-size: 13px;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB ul {' +
+'		list-style-type: none;' +
+'		margin: 0;' +
+'		padding: 0;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB ul li {' +
+'		width: 44px;' +
+'		height: 44px;' +
+'		float: left;' +
+'       border-radius: 24px;' +
+'       background: #0079b8;' +
+'       padding: 11px 0 0 0;' +
+'       margin: 0 16px 0 0;' +
+'		text-align: center;' +
+'	    cursor: pointer;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB ul li a:before {' +
+'		font-size: 22px;' +
+'		color: #fff;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB ul li:nth-child(2){' +
+'		background: #58aeeb;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB ul li:nth-child(3){' +
+'		background: #395b97;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB ul li:nth-child(4){' +
+'		background: #b5bd33;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB ul li:nth-child(5){' +
+'		background: #33bdf1;' +
+'	}' +
+'	#socialNavAB #socialNavInnerAB #buttonsAB ul li:nth-child(6){' +
+'		background: #e98d4d;' +
+'	}' +
+'}' +
+'</style>';
+
+$(function() {
+	$('head').append(abcss);
+	var $d = $('aside.disruptor a.cta:contains("Read the article")').parents('aside').hide();
+	var $htmlAB = $('<div id="socialNavAB" experiment-location="SocialNavStickyTop" class="">' +
+					'	<div id="socialNavInnerAB">' +
+					'		<div class="readNextAB"><a class="btn -arrow btn-fill" aria-labelledby="LearnMore Link" href="'+ $('a.cta', $d).attr('href') +'">Read Next</a></div>' +
+					'		<div id="titleWrapAB"><div class="divAB" /><div class="titleChildAB"><p>'+ $('span.title', $d).text() +'</p></div></div>' +
+					'		<div id="buttonsAB">' +
+					'			<div class="titleAB"><b>Share:</b> '+ McKinsey.Title +'</div>' +
+					'			<ul>' +
+					'				<li><a href="#0" class="mck-linkedin-icon" role="button"><span class="visually-hidden">Share this article on LinkedIn</span></a></li>' +
+					'				<li><a href="#0" class="mck-twitter-icon" role="button"><span class="visually-hidden">Share this article on Twitter</span></a></li>' +
+					'				<li><a href="#0" class="mck-facebook-icon" role="button"> <span class="visually-hidden">Share this article on Facebook</span></a></li>' +
+					'				<li><a href="mailto:?subject=From%20mckinsey.com%3a%20New%20talent%20tensions%20in%20an%20era%20of%20lower%20investment%20returns&amp;body=I%20recommend%20you%20visit%20mckinsey.com%20to%20read%3a%0d%0a%0d%0aNew%20talent%20tensions%20in%20an%20era%20of%20lower%20investment%20returns%0d%0ahttp%3a%2f%2fwww.mckinsey.com%2fbusiness-functions%2forganization%2four-insights%2fnew-talent-tensions-in-an-era-of-lower-investment-returns%3fcid%3deml-web" class="mck-email-icon" role="button"><span class="visually-hidden">Email this article</span></a></li>' +
+					'				<li class="print"><a data-capture-key="print-this-article" data-show-popup="login-overlay" class="interactive-link show-popup mck-print-icon print-this-article" aria-labelledby="open-interactive" role="button"></a></li>' +
+					'				<li id="main_0_articleShare_liArticlePdf_b"><a href="/~/media/McKinsey/Business Functions/Organization/Our Insights/New talent tensions in an era of lower investment returns/New-talent-tensions-in-the-era-of-lower-investment-returns.ashx" data-capture-key="download-this-article" rel="nofollow" data-show-popup="login-overlay" class="interactive-link show-popup mck-download-icon download-this-article" aria-labelledby="open-interactive" role="button"><span class="visually-hidden">Download this article</span></a></li>' +
+					'			</ul>' +
+					'		</div>' +
+					'	</div>' +
+					'</div>');
+	$('body').append($htmlAB);
+	$('aside.disruptor:eq(1)').hide();
+	$('.article-body-wrapper .rail').removeAttr('style');
+	
+	var $w = $(window);
+	$w.on('scroll', function tempABfunc(){
+		if($w.scrollTop() > 613){
+			$('#socialNavAB').addClass('showAB');
+		}
+		else {
+			$('#socialNavAB').removeClass('showAB');
+		}
+	});
+	var $p = $('#socialNavAB ul'),
+		$t = $('.article-body-wrapper > aside.share');
+	$('li a.mck-email-icon', $p).attr('href', $('li a.mck-email-icon', $t).attr('href'));
+	$($p).on('click', 'li a:not(.mck-email-icon)', function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		$('li a[class="'+ $(this).attr('class') +'"]', $t)[0].click();
+	});
+});

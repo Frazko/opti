@@ -1,0 +1,117 @@
+var abcss = '<style>' +
+'figure.exhibit .cta-links {' +
+'    position: absolute;' +
+'    right: 0;' +
+'    width: auto;' +
+'    margin-top: -10px;' +
+'}' +
+'figure.exhibit .collection-hero {' +
+'    margin: 0;' +
+'}' +
+'figure.exhibit ul.share-flyout {' +
+'    width: 144px;' +
+'	 margin-left: 1px;' +
+'}' +
+'figure.exhibit ul.share-flyout a {' +
+'    outline: none;' +
+'}' +
+'.share-exhibit-AB {' +
+'    float: right;' +
+'    top: -75px;' +
+'    position: relative;' +
+'}' +
+'.share-exhibit-AB ul {' +
+'    padding: 0;' +
+'    margin: 0;' +
+'}' +
+'.share-exhibit-AB li {' +
+'	 float: left;' +
+'	 list-style: none;' +
+'    font-size: 13px;' +
+'    font-family: Arial;' +
+'	 margin-left: 35px;' +
+'}' +
+'.share-exhibit-AB li a:before {' +
+'    font-size: 22px;' +
+'    position: relative;' +
+'    top: 5px;' +
+'	 left: -5px;' +
+'}' +
+'.share-exhibit-AB span {' +
+'	 float: left;' +
+'    padding: 6px 0 0 0;' +
+'    font-size: 13px;' +
+'    font-family: Arial;' +
+'}' +
+'</style>';
+
+$(function() {
+
+	window.constAB = {
+		facebookProductionAppId: '1382278882079245',
+		facebookRedesignStageAppId: '1391014944538972',
+		facebookStagingAppId: '1382278968745903',
+		pageURL: window.location.href.split('?')[0].toLowerCase().split('#')[0]
+	};
+	window.fbIDAB = '';
+	if(constAB.pageURL.indexOf('www.mckinsey.com') > -1 || constAB.pageURL.indexOf('http://mckinsey.com') > -1) {
+		fbIDAB = constAB.facebookProductionAppId;
+	} else if (constAB.pageURL.indexOf('redesign.mckinsey.com') > -1) {
+		fbIDAB = constAB.facebookRedesignStageAppId;
+	} else {
+		fbIDAB = constAB.facebookStagingAppId;
+	}
+
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : fbIDAB,
+			xfbml      : true,
+			version    : 'v2.7'
+		});
+	};
+
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+	
+	$('head').append(abcss);
+	$('figure.exhibit:not([id^="infographic"])').each(function(index){
+		var htmlAB = '<div class="share-exhibit-AB" experiment-location="Exhibit' + (index+1) + '"><ul class="social-links">' +
+					'	<span>Share this exhibit:</span>' +
+					'	<li><a href="https://www.linkedin.com/company/mckinsey-&amp;-company" class="mck-linkedin-icon" target="_blank">LinkedIn</a></li>' +
+					'	<li><a href="https://twitter.com/McKinsey" class="mck-twitter-icon" target="_blank">Twitter</a></li>' +
+					'	<li><a href="https://www.facebook.com/mckinsey" class="mck-facebook-icon" target="_blank">Facebook</a></li>' +
+					'</ul></div>';
+		$(this).prepend(htmlAB);
+	});
+	
+		
+	$('body').on('click', '.share-exhibit-AB .mck-facebook-icon', function(e) {
+		e.preventDefault();
+		var imgAltAB = $(this).parents('figure.exhibit').find('.infographic img');
+		FB.ui({
+			method: 'feed',
+			name: document.title.substring(0,document.title.lastIndexOf('|')-1),
+			link: constAB.pageURL+'#'+imgAltAB.attr('id'),
+			picture: 'http://www.mckinsey.com' + escape(imgAltAB.attr('data-fallback')),
+			caption: 'McKinsey.com',
+			description: imgAltAB.attr('alt'),
+			message: 'msg'
+		});
+	});
+	$('body').on('click', '.share-exhibit-AB .mck-linkedin-icon', function(e) {
+		e.preventDefault();
+		var imgAltAB = $(this).parents('figure.exhibit').find('.infographic img');
+		window.open('//www.linkedin.com/shareArticle?mini=true&summary=%28Exhibit%29%20'+encodeURIComponent(imgAltAB.attr('alt'))+'&source=McKinsey.com&url='+encodeURIComponent(constAB.pageURL+'#'+imgAltAB.attr('id')), 'Share', 'height=500,width=600');
+	});
+	$('body').on('click', '.share-exhibit-AB .mck-twitter-icon', function(e) {
+		e.preventDefault();
+		var imgAltAB = $(this).parents('figure.exhibit').find('.infographic img');
+		window.open('//twitter.com/intent/tweet?url='+encodeURIComponent(constAB.pageURL+'#'+imgAltAB.attr('id'))+'&text=%28Exhibit%29%20'+encodeURIComponent(imgAltAB.attr('alt'))+'%20@mckinsey', 'Share', 'height=500,width=600');
+	});
+});

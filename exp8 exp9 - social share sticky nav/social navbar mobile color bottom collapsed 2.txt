@@ -1,0 +1,70 @@
+var abcss = '<style>' +
+'@media only screen and (min-device-width : 740px) { .article-body-wrapper > aside.abCloned.icon-brand-colors { display: none !important; }}' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors {' +
+'   position: fixed;' +
+'	display: none;' +
+'   bottom: 0;' +
+'   width: 100%;' +
+'	height: 56px;' +
+'   left: 0;' +
+'   margin: 0;' +
+'   z-index: 999;' +
+'}' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list {' +
+'	text-align: right;' +
+'   border: none;' +
+'	display: -webkit-flex;' +
+'}' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li {' +
+'	flex: 0.2;' +
+'	padding: 0;' +
+'}' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li > a {' +
+'	width: 101%;' +
+'   padding: 6px 4px 6px 3px;' +
+'   text-align: center;' +
+'	line-height: 48px;' +
+'	min-width: 50px;' +
+'}' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li.print,' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li#main_0_articleShare_liArticlePdf_b {' +
+'	display: none;' +
+'}' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li > a:before { color: #fff; font-size: 19px; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li > a.mck-linkedin-icon { background: #007ab6; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li > a.mck-twitter-icon { background: #57adee; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li > a.mck-facebook-icon { background: #3b5a9a; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li > a.mck-email-icon { background: #b4bf25; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li > a.mck-print-icon { background: #31bbf3; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li > a.mck-download-icon { background: #ea9049; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li > a.mck-share-icon2 { background: #e37222; padding-top: 6px; margin-left: -1px; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li.off { display: none; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li.openShare { margin-left: auto; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li.openShare > a.r2-close:before { font-family: r2-icons; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li.openShare.open a { padding: 2px 0 10px; }' +
+'.article-body-wrapper > aside.abCloned.icon-brand-colors ul.link-list > li.openShare.open svg { display: none; }' +
+'</style>';
+
+$(function() {
+$('head').append(abcss);
+	var $abO = $('.article-body-wrapper > aside.share.icon-brand-colors').clone(true, true);
+	$abO.addClass('abCloned');
+	$('ul.link-list > li', $abO).addClass('off');
+	$('ul.link-list', $abO).append('<li class="openShare"><a href="#0" class="mck-share-icon2"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 38 38"><defs><style>.cls-1, .cls-2 {fill: #fff;}.cls-2 {fill-rule: evenodd;}</style></defs><circle class="cls-1" cx="32" cy="5" r="5"/><circle data-name="Ellipse 2 copy" class="cls-1" cx="32" cy="32" r="5"/><circle data-name="Ellipse 2 copy 2" class="cls-1" cx="5" cy="19" r="5"/><path class="cls-2" d="M5.7 20.3L4.3 17.7l28-14 1.3 2.7Z"/><path data-name="Shape 2 copy" class="cls-2" d="M5.7 16.7L4.3 19.3l28 14 1.3-2.7Z"/></svg></a></li>');
+	$('.article-body-wrapper').append($abO);
+	$('li.openShare').on('click', function(){
+		if($(this).hasClass('open')){
+			$(this).removeClass('open');
+			$('> a', $(this)).removeClass('r2-close');
+			$('.article-body-wrapper > aside.abCloned ul.link-list > li:not(.openShare)').addClass('off');
+		} else {
+			$(this).addClass('open');
+			$('> a', $(this)).addClass('r2-close');
+			$('.article-body-wrapper > aside.abCloned ul.link-list > li').removeClass('off');
+		}
+	});
+	$(document).on('scroll', function(){
+	if($(document).scrollTop() >= 760){ $('.article-body-wrapper > aside.abCloned').fadeIn('slow'); }
+	else { $('.article-body-wrapper > aside.abCloned').fadeOut('fast'); }
+	});
+});

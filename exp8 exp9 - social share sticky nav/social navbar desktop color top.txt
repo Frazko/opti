@@ -1,0 +1,49 @@
+var abcss = '<style>' +
+'#abTagline {' +
+'   position: absolute;' +
+'   left: 15%;' +
+'   top: 32%;' +
+'   font-size: 16px;' +
+'}' +
+'.article-body-wrapper > aside.share.icon-brand-colors {' +
+'   position: fixed;' +
+'	display: none;' +
+'   top: 0;' +
+'   background: url(/redesign/resources/images/interlaced-gray-bg.png);' +
+'   width: 100%;' +
+'	height: 60px;' +
+'   left: 0;' +
+'   margin: 0;' +
+'   z-index: 999;' +
+'	padding-left: 60%;' +
+'	border-bottom: 1px solid #d4d4d4;' +
+'}' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li {' +
+'	padding: 0;' +
+'	margin: 0 0 0 -4px;' +
+'}' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a {' +
+'	width: 64px;' +
+'   padding: 4px 3px 3px 3px;' +
+'   text-align: center;' +
+'	line-height: 53px;' +
+'}' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-linkedin-icon:before,' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-twitter-icon:before,' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-facebook-icon:before,' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-email-icon:before,' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-print-icon:before,' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-download-icon:before { color: #fff; font-size: 22px; }' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-linkedin-icon { background: #007ab6; }' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-twitter-icon { background: #57adee; }' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-facebook-icon { background: #3b5a9a; }' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-email-icon { background: #b4bf25; }' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-print-icon { background: #31bbf3; }' +
+'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-download-icon { background: #ea9049; }' +
+'</style>';
+
+$('head').append(abcss);
+$('.article-body-wrapper > aside > #share-label').before('<div id="abTagline">'+ $('header h1.headline').text() +'</div>');
+$(document).on('scroll', function(){
+$(document).scrollTop() >= 400? $('.article-body-wrapper > aside.share.icon-brand-colors').fadeIn('slow') : $('.article-body-wrapper > aside.share.icon-brand-colors').fadeOut('fast');
+});

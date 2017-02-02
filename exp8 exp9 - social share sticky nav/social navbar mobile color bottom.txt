@@ -1,0 +1,45 @@
+	var abcss = '<style>' +
+	'.article-body-wrapper > aside.share.icon-brand-colors {' +
+	'   position: fixed;' +
+	'	display: none;' +
+	'   bottom: -6px;' +
+	'   width: 100%;' +
+	'	height: 50px;' +
+	'   left: 0;' +
+	'   margin: 0;' +
+	'   z-index: 999;' +
+	'	display: -webkit-flex;' +
+	'}' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li {' +
+	'	padding: 0;' +
+	'	margin: 0 0 0 -4px;' +
+	'   flex: 0.25;' +
+	'}' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a {' +
+	'	width: 100%;' +
+	'   padding: 2px 4px 6px 3px;' +
+	'   text-align: center;' +
+	'	line-height: 44px;' +
+	'}' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li.print,' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li#main_0_articleShare_liArticlePdf_b {' +
+	'	display: none;' +
+	'}' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-linkedin-icon:before,' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-twitter-icon:before,' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-facebook-icon:before,' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-email-icon:before,' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-print-icon:before,' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-download-icon:before { color: #fff; font-size: 20px; }' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-linkedin-icon { background: #007ab6; }' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-twitter-icon { background: #57adee; }' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-facebook-icon { background: #3b5a9a; }' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-email-icon { background: #b4bf25; }' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-print-icon { background: #31bbf3; }' +
+	'.article-body-wrapper > aside.share.icon-brand-colors ul.link-list > li > a.mck-download-icon { background: #ea9049; }' +
+	'</style>';
+
+	$('head').append(abcss);
+	$(document).on('scroll', function(){
+	$(document).scrollTop() >= 400? $('.article-body-wrapper > aside.share.icon-brand-colors').fadeIn('slow') : $('.article-body-wrapper > aside.share.icon-brand-colors').fadeOut('fast');
+	});

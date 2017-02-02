@@ -1,0 +1,119 @@
+		var abcss = '<style>' +
+		'aside.disruptor.-span-leftAB2 {' +
+		'	 opacity: 0;' +
+		'    float: right;' +
+		'    width: 340px;' +
+		'    margin: -85px 0 20px 50px;' +
+		'    margin-right: -122%;' +
+		'    padding: 0;' +
+		'    border: none;' +
+		'    border-left: 1px solid #d4d4d4;' +
+		'    z-index: 10;' +
+		'    position: relative;' +
+		'}' +
+		'aside.disruptor.-span-leftAB2.fixed {' +
+		'    position: fixed;' +
+		'	 margin: 0;' +
+		'}' +
+		'aside.disruptor.-span-leftAB2.absolute {' +
+		'    position: absolute;' +
+		'	 margin: 0;' +
+		'}' +
+		'aside.disruptor.-span-leftAB2 .readNextAB {' +
+		'    text-transform: uppercase;' +
+		'    color: #042d6c;' +
+		'    padding: 0 0 10px 0;' +
+		'    font-family: Arial;' +
+		'    font-weight: 600;' +
+		'    font-size: 15px;' +
+		'}' +
+		'aside.disruptor.-span-leftAB2 img {' +
+		'    display: none;' +
+		'}' +
+		'aside.disruptor.-span-leftAB2 .disruptor-content {' +
+		'    padding: 5px 0 5px 10%;' +
+		'}' +
+		'aside.disruptor.-span-leftAB2 .disruptor-content .title {' +
+		'    font-size: 33px;' +
+		'	 color: #df431b;' +
+		'	 background: -webkit-linear-gradient(left, #ce2029 , #ff8501);' +
+		'	 background: -o-linear-gradient(right, #ce2029, #ff8501);' +
+		'	 background: -moz-linear-gradient(right, #ce2029, #ff8501);' +
+		'	 -webkit-background-clip: text;' +
+		'	 -webkit-text-fill-color: transparent;' +
+		'	 margin: 0;' +
+		'}' +
+		'</style>';
+
+		$(function() {
+			$('head').append(abcss);
+			var $o = $('aside.disruptor a.cta:contains("Read this article"), aside.disruptor a.cta:contains("Read the article")').parents('aside');
+			$o.attr('experiment-location', 'RightRailSlideIn').removeClass('-span-right').addClass('-span-leftAB2');
+			$('.disruptor-content', $o).prepend('<div class="readNextAB">Read Next</div>');
+			var $clonedA = $('a.cta', $o).clone().removeAttr('class').empty();
+			$('.title', $o).wrap($clonedA);
+			if($('article > hr:last').length) $o.insertBefore('article > hr:last');
+			else $o.insertBefore('article > p:last');
+			$('.article-body-wrapper .rail').removeAttr('style');
+			
+			var $w = $(window), elemPosTop, elemPosLeft, elemPosLeftAbs, setCutoffTop, scrollTop, scrollPrev = 0, scrollDir, $c = $('section.article-closer'), elemOn, elemFixed, elemAbsolute;
+			var animStarted = true;
+			$w.on('scroll', function tempABfunc(){
+				elemPosTop = Math.round($o.offset().top);
+				scrollTop = Math.round($w.scrollTop());
+				scrollDir = (scrollTop - scrollPrev > 0)? true : false;
+				scrollPrev = scrollTop;
+				elemOn = $o.hasClass('on');
+				elemFixed = $o.hasClass('fixed');
+				elemAbsolute = $o.hasClass('absolute');
+			
+				if(((elemPosTop - $w.height() - 30) < scrollTop) && !elemOn && animStarted){
+					animStarted = false;
+					$o.animate({
+						opacity: 1,
+						marginRight: "-61%"
+					}, 1000, function() {
+						setCutoffTop = (elemPosTop + 50);
+						elemPosLeft = Math.round($o.offset().left);
+						elemPosLeftAbs = Math.round($o.position().left);
+						$o.addClass('on');
+					});
+				}
+				else if(elemOn && !elemAbsolute && !elemFixed && scrollDir && scrollTop > elemPosTop){
+					$o.addClass('fixed');
+					$o.css({
+						top: '10px',
+						left: elemPosLeft - $w.scrollLeft()
+					});
+				}
+				else if(elemOn && !elemAbsolute && (scrollTop + 300) > $c.position().top){
+					$o.css({
+						top: 'initial',
+						bottom: '20px',
+						left: elemPosLeftAbs + 50
+					});
+					$o.removeClass('fixed').addClass('absolute');
+				}
+				else if(elemOn && elemAbsolute && (scrollTop + 300) < $c.position().top){
+					$o.addClass('fixed').removeClass('absolute');
+					$o.css({
+						top: '10px',
+						left: elemPosLeft - $w.scrollLeft()
+					});
+				}
+				else if(elemOn && elemFixed && !elemAbsolute && !scrollDir && scrollTop < elemPosTop && scrollTop > setCutoffTop){
+					$o.css({
+						marginRight: '-61%',
+						opacity: 1,
+						bottom: 'inherit'
+					});
+				}
+				else if(elemOn && !elemAbsolute && !scrollDir && (scrollTop + 50) < setCutoffTop){
+					$o.removeClass('fixed').removeAttr('style');
+					$o.css({
+						marginRight: '-61%',
+						opacity: 1
+					});
+				}
+			});
+		});
